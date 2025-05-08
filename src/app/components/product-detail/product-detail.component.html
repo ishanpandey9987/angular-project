@@ -1,0 +1,42 @@
+<div class="product-detail-container">
+  <div *ngIf="loading" class="loading" data-cy="loading-indicator">
+    Loading product details...
+  </div>
+  
+  <div *ngIf="error" class="error" data-cy="error-message">
+    <h2>Product Not Found</h2>
+    <p>Sorry, the product you're looking for doesn't exist or couldn't be loaded.</p>
+    <button (click)="goBack()" class="back-button" data-cy="back-button">Back to Products</button>
+  </div>
+  
+  <div *ngIf="product && !loading" class="product-detail" data-cy="product-detail">
+    <div class="product-detail-header">
+      <button (click)="goBack()" class="back-button" data-cy="back-button">
+        ← Back to Products
+      </button>
+    </div>
+    
+    <div class="product-detail-content">
+      <div class="product-detail-image">
+        <img [src]="product.imageUrl" [alt]="product.name">
+      </div>
+      
+      <div class="product-detail-info">
+        <h1 data-cy="product-name">{{ product.name }}</h1>
+        <p class="price" data-cy="product-price">${{ product.price.toFixed(2) }}</p>
+        <p class="description" data-cy="product-description">{{ product.description }}</p>
+        
+        <div class="action-buttons">
+          <button class="primary-button" data-cy="add-to-cart">Add to Cart</button>
+          <button class="secondary-button" data-cy="add-to-wishlist">Add to Wishlist</button>
+        </div>
+        
+        <div class="product-detail-meta">
+          <p><strong>Product ID:</strong> <span data-cy="product-id">{{ product.id }}</span></p>
+          <p><strong>Availability:</strong> <span data-cy="product-availability">In Stock</span></p>
+          <p><strong>Shipping:</strong> <span data-cy="product-shipping">Free shipping on orders over $50</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
